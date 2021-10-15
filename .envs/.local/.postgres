@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=nonovium_video_backend
+POSTGRES_USER=GiketeGfUDDNCyfmSGXLOrWcXSGthVrh
+POSTGRES_PASSWORD=Lw6lJSrGA5EwmYwglHI8rwq455dO3SjXchip3OzfeEMbtP86hsGQB8VzSQD7AynH
