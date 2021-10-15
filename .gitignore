@@ -280,3 +280,5 @@ nonovium_video_backend/media/
 .env
 .envs/*
 !.envs/.local/
+
+backups/

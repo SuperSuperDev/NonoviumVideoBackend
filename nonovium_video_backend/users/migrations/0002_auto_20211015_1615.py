@@ -6,23 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='bio',
-            field=models.TextField(blank=True, default='This user has not added a bio yet', max_length=500),
+            model_name="user",
+            name="bio",
+            field=models.TextField(
+                blank=True, default="This user has not added a bio yet", max_length=500
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='dark_mode',
+            model_name="user",
+            name="dark_mode",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='user',
-            name='user_image',
-            field=models.CharField(default='https://avatars.dicebear.com/api/avataaars/99780.svg?size=150', max_length=250),
+            model_name="user",
+            name="user_image",
+            field=models.CharField(
+                default="https://avatars.dicebear.com/api/avataaars/99780.svg?size=150",
+                max_length=250,
+            ),
         ),
     ]

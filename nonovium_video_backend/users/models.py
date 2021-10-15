@@ -21,6 +21,8 @@ class User(AbstractUser):
         max_length=250,
         default=f"https://avatars.dicebear.com/api/avataaars/{random_string()}.svg?size=150",
     )
+    """User profile image If user does not supply an image, we create a random one"""
+
     bio = TextField(
         max_length=500, blank=True, default="This user has not added a bio yet"
     )
