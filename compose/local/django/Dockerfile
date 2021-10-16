@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
   build-essential \
   # psycopg2 dependencies
-  libpq-dev
+  libpq-dev \
   # ffmpeg dependencies
-
+  ffmpeg
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
@@ -43,6 +43,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev \
   # Translations dependencies
   gettext \
+  # ffmpeg dependencies
+  ffmpeg \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
