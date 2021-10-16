@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   # psycopg2 dependencies
   libpq-dev
+  # ffmpeg dependencies
+
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .

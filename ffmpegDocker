@@ -1,0 +1,33 @@
+# Extract 5s @00:49:42 into a GIF
+
+docker run jrottenberg/ffmpeg -stats  \
+        -i https://archive.org/download/thethreeagesbusterkeaton/Buster.Keaton.The.Three.Ages.ogv \
+        -loop 0  \
+        -final_delay 500 -c:v gif -f gif -ss 00:10:42 -t 5 - > trow_ball.gif
+
+# Convert 10bits MKV into a 10Bits MP4Convert 10bits MKV into a 10Bits MP4
+docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg:3.4-scratch \
+        -stats \
+        -i http://www.jell.yfish.us/media/jellyfish-20-mbps-hd-hevc-10bit.mkv \
+        -c:v libx265 -pix_fmt yuv420p10 \
+        -t 5 -f mp4 ./test/test.mp4
+
+# Use ZeroMQ to toggle filter value on-fly
+
+# Let's start some process continuously writing some radio music, and listen it:
+
+ docker run --rm -d -v $(pwd):$(pwd) -w $(pwd) -p 11235:11235 \
+        --name radio-writer jrottenberg/ffmpeg \
+        -i http://radio.casse-tete.solutions/salut-radio-64.mp3 \
+        -filter_complex '[0:a]volume@vol=1,azmq=bind_address=tcp\\\://0.0.0.0\\\:11235[out]' \
+        -map '[out]' ./salut-radio.mp3
+
+ ffplay ./salut-radio.mp3
+
+ # Extract images from a video
+ ## Extract a frame each second nonovium_video_backend/media/videos/news-opening-background.mp4
+
+docker run -v $(pwd):$(pwd) -w $(pwd) \
+        jrottenberg/ffmpeg:3.4-scratch -stats  \
+        -i https://env-0561487.jcloud-ver-jpe.ik-server.com/wp-content/uploads/sites/5/2020/07/High_Tech_Logo_2.mp4 \
+        -r 1 -f image2 ./tmp/image%03d.jpg

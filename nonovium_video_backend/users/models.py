@@ -18,15 +18,19 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
     user_image = CharField(
+        _("Profile Image URL"),
         max_length=250,
         default=f"https://avatars.dicebear.com/api/avataaars/{random_string()}.svg?size=150",
     )
     """User profile image If user does not supply an image, we create a random one"""
 
     bio = TextField(
-        max_length=500, blank=True, default="This user has not added a bio yet"
+        _("Short Bio"),
+        max_length=500,
+        blank=True,
+        default="This user has not added a bio yet",
     )
-    dark_mode = BooleanField(default=False)
+    dark_mode = BooleanField(_("Dark Mode"), default=False)
 
     def get_absolute_url(self):
         """Get url for user's detail view.
