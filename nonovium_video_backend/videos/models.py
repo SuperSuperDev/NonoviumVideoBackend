@@ -1,4 +1,8 @@
+# from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+
+# from video_encoding.fields import VideoField
+# from video_encoding.models import Format
 
 # from nonovium_video_backend.users.models import User
 
