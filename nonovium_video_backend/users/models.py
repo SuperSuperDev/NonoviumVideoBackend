@@ -10,6 +10,9 @@ def random_string():
     return str(random.randint(10000, 99999))
 
 
+rand_str = random_string()
+
+
 class User(AbstractUser):
     """Default user for Nonovium Video Backend."""
 
