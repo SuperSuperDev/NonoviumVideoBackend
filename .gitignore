@@ -282,3 +282,12 @@ nonovium_video_backend/media/
 !.envs/.local/
 
 backups/
+
+# media files
+*.mp4
+*.mov
+*.m4v
+*.mp3
+*.webm
+*.ogg
+*.ogv

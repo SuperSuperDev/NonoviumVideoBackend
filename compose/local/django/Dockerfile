@@ -15,8 +15,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # psycopg2 dependencies
   libpq-dev \
   # ffmpeg dependencies
-  ffmpeg
-  # TODO Add ffmpeg to production django Dockerfile
+  ffmpeg \
+  # OpenCV dependencies
+  libgtk2.0-dev \
+  pkg-config
+  # TODO Add ffmpeg, libgtk2.0-dev, pkg-config to production django Dockerfile
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
@@ -46,6 +49,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   gettext \
   # ffmpeg dependencies
   ffmpeg \
+  # OpenCV dependencies
+  libgtk2.0-dev \
+  pkg-config \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

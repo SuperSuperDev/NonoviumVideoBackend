@@ -56,3 +56,6 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+# django_rq
+urlpatterns += [path("django-rq/", include("django_rq.urls"))]
