@@ -12,13 +12,15 @@ class VideoAdmin(admin.ModelAdmin):
     fields = (
         "title",
         "file",
+        "video_360",
+        "video_sd",
         "width",
         "height",
         "duration",
         "uploaded_video",
         "thumbnail",
     )
-    readonly_fields = ("width", "height", "duration")
+    readonly_fields = ("width", "height", "duration", "video_360", "video_sd")
 
 
 admin.site.register(VideoPost)

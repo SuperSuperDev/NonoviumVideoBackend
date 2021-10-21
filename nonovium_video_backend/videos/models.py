@@ -17,6 +17,22 @@ class Video(models.Model):
     file = VideoField(
         width_field="width", height_field="height", duration_field="duration"
     )
+    video_360 = VideoField(
+        editable=False,
+        null=True,
+        blank=True,
+        width_field="width",
+        height_field="height",
+        duration_field="duration",
+    )
+    video_sd = VideoField(
+        editable=False,
+        null=True,
+        blank=True,
+        width_field="width",
+        height_field="height",
+        duration_field="duration",
+    )
 
     format_set = GenericRelation(Format)
 
