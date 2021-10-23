@@ -3,10 +3,10 @@
 
 # # from .tasks import create_thumbnail as create_thumbnail_task
 # from django_rq import enqueue
-# from video_encoding import tasks
-
+# from nonovium_video_backend.video_encoder import tasks
 
 # from .models import Video
+# from .tasks import convert_video_task
 
 # from .tasks import encode_video
 
@@ -35,7 +35,13 @@
 #     #         instance._meta.app_label,
 #     #         instance._meta.model_name,
 #     #         instance.pk)
-#     tasks.convert_all_videos,
+
+#     # tasks.convert_all_videos,
+#     # instance._meta.app_label,
+#     # instance._meta.model_name,
+#     # instance.pk
+#     convert_video_task.delay(
 #     instance._meta.app_label,
 #     instance._meta.model_name,
 #     instance.pk
+#     )

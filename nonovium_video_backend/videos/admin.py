@@ -1,5 +1,6 @@
 from django.contrib import admin
-from video_encoding.admin import FormatInline
+
+from nonovium_video_backend.video_encoder.admin import FormatInline
 
 from .models import Video, VideoPost
 
@@ -12,15 +13,12 @@ class VideoAdmin(admin.ModelAdmin):
     fields = (
         "title",
         "file",
-        "video_360",
-        "video_sd",
         "width",
         "height",
         "duration",
-        "uploaded_video",
         "thumbnail",
     )
-    readonly_fields = ("width", "height", "duration", "video_360", "video_sd")
+    readonly_fields = ("width", "height", "duration")
 
 
 admin.site.register(VideoPost)

@@ -14,3 +14,6 @@ class VideoFormView(CreateView):
         context = super(VideoFormView, self).get_context_data(*args, **kwargs)
         context["videos"] = Video.objects.all()
         return context
+
+
+video_form_view = VideoFormView.as_view()

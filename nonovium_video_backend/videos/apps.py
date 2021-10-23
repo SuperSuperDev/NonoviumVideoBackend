@@ -6,6 +6,6 @@ class VideosConfig(AppConfig):
     verbose_name = "Videos"
 
 
-# class VideoEncodingConfig(AppConfig):
-#     name = "nonovium_video_backend.video_encoding"
-#     verbose_name = "Video Encoding"
+# class VideoEncoderConfig(AppConfig):
+#     name = "nonovium_video_backend.video_encoder"
+#     verbose_name = "Video Encoder"

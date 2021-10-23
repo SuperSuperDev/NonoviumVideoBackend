@@ -1,15 +1,13 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models, transaction
-from video_encoding.fields import ImageField, VideoField
-from video_encoding.models import Format
 
-# from nonovium_video_backend.users.models import User
+from nonovium_video_backend.video_encoder.fields import ImageField, VideoField
+from nonovium_video_backend.video_encoder.models import Format
 
 
 # Create your models here.
 class Video(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
-    uploaded_video = models.FileField(upload_to="videos/", blank=True)
     width = models.PositiveIntegerField(editable=False, null=True)
     height = models.PositiveIntegerField(editable=False, null=True)
     duration = models.FloatField(editable=False, null=True)
@@ -17,31 +15,23 @@ class Video(models.Model):
     file = VideoField(
         width_field="width", height_field="height", duration_field="duration"
     )
-    video_360 = VideoField(
-        editable=False,
-        null=True,
-        blank=True,
-        width_field="width",
-        height_field="height",
-        duration_field="duration",
-    )
-    video_sd = VideoField(
-        editable=False,
-        null=True,
-        blank=True,
-        width_field="width",
-        height_field="height",
-        duration_field="duration",
-    )
-
     format_set = GenericRelation(Format)
 
     def save(self, *args, **kwargs):
-        from .tasks import encode_video
+        """
+        Save and convert the video to the all formats.
+        """
+        from .tasks import convert_video_task, create_thumbnail
 
         super(Video, self).save(*args, **kwargs)
+        if self.file and not self.thumbnail:
+            transaction.on_commit(lambda: create_thumbnail.delay(self.pk))
         if self.file:
-            transaction.on_commit(lambda: encode_video.delay(self.id))
+            transaction.on_commit(
+                lambda: convert_video_task.delay(
+                    self._meta.app_label, self._meta.model_name, self.pk
+                )
+            )
 
 
 class VideoPost(models.Model):

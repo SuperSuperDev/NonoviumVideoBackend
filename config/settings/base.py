@@ -72,7 +72,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
-    "video_encoding",
+    # "video_encoding",
     "django_rq",
     "vidgear",
 ]
@@ -80,6 +80,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "nonovium_video_backend.users.apps.UsersConfig",
     # Your stuff: custom apps go here
+    "nonovium_video_backend.video_encoder.apps.VideoEncoderConfig",
     "nonovium_video_backend.videos.apps.VideosConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -343,3 +344,139 @@ RQ_QUEUES = {
 }
 
 RQ_EXCEPTION_HANDLERS = ["path.to.my.handler"]  # If you need custom exception handlers
+
+VIDEO_ENCODING_BACKEND = (
+    "nonovium_video_backend.video_encoder.backends.ffmpeg.FFmpegBackend"
+)
+VIDEO_ENCODING_THREADS = 4
+VIDEO_ENCODING_BACKEND_PARAMS = {}
+VIDEO_ENCODING_FORMATS = {
+    "FFmpeg": [
+        {
+            "name": "mp4_360",
+            "extension": "mp4",
+            "params": [
+                "-vf",
+                "scale=-2:360",
+                "-movflags",
+                "faststart",
+                "-crf",
+                "17",
+                "-vcodec",
+                "h264",
+                "-acodec",
+                "aac",
+                "-strict",
+                "-2",
+                "-f",
+                "mp4",
+            ],
+        },
+        {
+            "name": "webm_sd",
+            "extension": "webm",
+            "params": [
+                "-b:v",
+                "1000k",
+                "-maxrate",
+                "1000k",
+                "-bufsize",
+                "2000k",
+                "-codec:v",
+                "libvpx",
+                "-r",
+                "30",
+                "-vf",
+                "scale=-1:480",
+                "-qmin",
+                "10",
+                "-qmax",
+                "42",
+                "-codec:a",
+                "libvorbis",
+                "-b:a",
+                "128k",
+                "-f",
+                "webm",
+            ],
+        },
+        {
+            "name": "webm_hd",
+            "extension": "webm",
+            "params": [
+                "-codec:v",
+                "libvpx",
+                "-b:v",
+                "3000k",
+                "-maxrate",
+                "3000k",
+                "-bufsize",
+                "6000k",
+                "-vf",
+                "scale=-1:720",
+                "-qmin",
+                "11",
+                "-qmax",
+                "51",
+                "-acodec",
+                "libvorbis",
+                "-b:a",
+                "128k",
+                "-f",
+                "webm",
+            ],
+        },
+        {
+            "name": "mp4_sd",
+            "extension": "mp4",
+            "params": [
+                "-codec:v",
+                "libx264",
+                "-crf",
+                "20",
+                "-preset",
+                "medium",
+                "-b:v",
+                "1000k",
+                "-maxrate",
+                "1000k",
+                "-bufsize",
+                "2000k",
+                "-vf",
+                "scale=-2:480",  # http://superuser.com/a/776254
+                "-codec:a",
+                "aac",
+                "-b:a",
+                "128k",
+                "-strict",
+                "-2",
+            ],
+        },
+        {
+            "name": "mp4_hd",
+            "extension": "mp4",
+            "params": [
+                "-codec:v",
+                "libx264",
+                "-crf",
+                "20",
+                "-preset",
+                "medium",
+                "-b:v",
+                "3000k",
+                "-maxrate",
+                "3000k",
+                "-bufsize",
+                "6000k",
+                "-vf",
+                "scale=-2:720",
+                "-codec:a",
+                "aac",
+                "-b:a",
+                "128k",
+                "-strict",
+                "-2",
+            ],
+        },
+    ]
+}
