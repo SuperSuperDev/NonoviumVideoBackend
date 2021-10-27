@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from nonovium_video_backend.video_encoder.api.serializers import FormatSerializer
 from nonovium_video_backend.videos.models import Video, VideoPost
 
 
@@ -17,5 +18,9 @@ class VideoPostSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class PopulatedVideoSerializer(VideoSerializer):
+    format_set = FormatSerializer(many=True)
+
+
 class PopulatedVideoPostSerializer(VideoPostSerializer):
-    video = VideoSerializer()
+    video = PopulatedVideoSerializer()

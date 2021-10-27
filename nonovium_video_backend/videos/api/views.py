@@ -6,7 +6,7 @@ from nonovium_video_backend.videos.models import Video, VideoPost
 from .serializers import PopulatedVideoPostSerializer, VideoSerializer
 
 
-class VideoViewSetList(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+class VideoListView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     """
     API endpoint that allows videos to be viewed or !edited.
     """
@@ -22,7 +22,7 @@ class VideoViewSetList(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
         return self.queryset()
 
 
-class VideoPostViewSetList(
+class VideoPostListView(
     ListModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericViewSet
 ):
     queryset = VideoPost.objects.all()
