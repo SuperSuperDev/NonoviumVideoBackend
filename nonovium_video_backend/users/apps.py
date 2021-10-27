@@ -6,8 +6,8 @@ class UsersConfig(AppConfig):
     name = "nonovium_video_backend.users"
     verbose_name = _("Users")
 
-    def ready(self):
-        try:
-            import nonovium_video_backend.users.signals  # noqa F401
-        except ImportError:
-            pass
+    # def ready(self):
+    #     try:
+    #         import nonovium_video_backend.users.signals  # noqa F401
+    #     except ImportError:
+    #         pass
