@@ -72,3 +72,38 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+# https://github.com/qix-/better-exceptions
+INSTALLED_APPS += ["better_exceptions"]  # noqa F405
+MIDDLEWARE += [
+    "better_exceptions.integrations.django.BetterExceptionsMiddleware",
+]  # noqa F405
+from better_exceptions.integrations.django import skip_errors_filter  # noqa
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "skip_errors": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": skip_errors_filter,
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            # without the 'filters' key, Django will log errors twice:
+            # one time from better-exceptions and one time from Django.
+            # with the 'skip_errors' filter, we remove the repeat log
+            # from Django, which is unformatted.
+            "filters": ["skip_errors"],
+            "class": "logging.StreamHandler",
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": [
+                "console",
+            ],
+        }
+    },
+}

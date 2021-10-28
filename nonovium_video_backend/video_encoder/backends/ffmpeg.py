@@ -24,6 +24,7 @@ class FFmpegBackend(BaseEncoderBackend):
     name = "FFmpeg"
 
     def __init__(self) -> None:
+
         self.params: List[str] = [
             "-threads",
             str(settings.VIDEO_ENCODING_THREADS),
@@ -66,6 +67,17 @@ class FFmpegBackend(BaseEncoderBackend):
         return errors
 
     def _spawn(self, cmd: List[str]) -> subprocess.Popen:
+        """Spawn a subprocess .
+
+        Args:
+            cmd (List[str]): [description]
+
+        Raises:
+            exceptions.FFmpegError: [description]
+
+        Returns:
+            subprocess.Popen: [description]
+        """
         try:
             return subprocess.Popen(
                 cmd,
@@ -79,6 +91,20 @@ class FFmpegBackend(BaseEncoderBackend):
     def encode(
         self, source_path: str, target_path: str, params: List[str]
     ) -> Generator[float, None, None]:
+        """Encode a video . All encoder specific options are passed in using params .
+
+        Args:
+            source_path (str): [description]
+            target_path (str): [description]
+            params (List[str]): [description]
+
+        Raises:
+            exceptions.FFmpegError: [description]
+            exceptions.FFmpegError: [description]
+
+        Yields:
+            Generator[float, None, None]: [description]
+        """
         """
         Encode a video.
 

@@ -64,6 +64,9 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
 
+# set the BETTER_EXCEPTIONS environment variable to any value:
+RUN export BETTER_EXCEPTIONS=1
+
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint

@@ -46,7 +46,7 @@ class Video(models.Model):
 class VideoPost(models.Model):
     title = models.CharField(max_length=255)
     post_id = models.CharField(
-        default=f"${str(uuid.uuid4())}", editable=False, null=False, max_length=36
+        default=f"${str(uuid.uuid4())}", editable=False, null=False, max_length=256
     )
     slug = models.CharField(
         max_length=255, unique=True, default=slugify(title), blank=True
