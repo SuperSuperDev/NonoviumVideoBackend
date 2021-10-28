@@ -1,8 +1,7 @@
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
 from rest_framework import status
-
+from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 
 def get_all(model, serial):
@@ -48,15 +47,16 @@ def update_one(model, serial, request, pk):
 
 
 def favorite(model, serial, request, pk):
-    permission_classes = (IsAuthenticated,)
-    try:
-        data = model.objects.get(pk=pk)
-        if request.user in data.favorited_by.all():
-            data.favorited_by.remove(request.user.id)
-        else:
-            data.favorited_by.add(request.user.id)
-        data.save()
-        serialized_data = serial(data)
-        return Response(serialized_data.data, status=status.HTTP_202_ACCEPTED)
-    except model.DoesNotExist:
-        raise NotFound()
+    permission_classes = IsAuthenticated
+    if permission_classes:
+        try:
+            data = model.objects.get(pk=pk)
+            if request.user in data.favorited_by.all():
+                data.favorited_by.remove(request.user.id)
+            else:
+                data.favorited_by.add(request.user.id)
+            data.save()
+            serialized_data = serial(data)
+            return Response(serialized_data.data, status=status.HTTP_202_ACCEPTED)
+        except model.DoesNotExist:
+            raise NotFound()
