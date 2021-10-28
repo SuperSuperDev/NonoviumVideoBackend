@@ -15,7 +15,6 @@ class VideoAdmin(admin.ModelAdmin):
         "file",
         "width",
         "height",
-
         "duration",
         "thumbnail",
         "size",

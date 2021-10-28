@@ -29,11 +29,12 @@ class DetailView(APIView):
     def put(self, request, pk):
         return update_one(self.model, self.serial, request, pk)
 
+
 class FavoriteView(APIView):
     def __init__(self, model, serial):
         self.model = model
         self.serial = serial
 
     def post(self, request, pk):
-        print('here')
+        print("here")
         return favorite(self.model, self.serial, request, pk)
