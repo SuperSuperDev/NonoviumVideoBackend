@@ -3,6 +3,7 @@ import uuid
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models, transaction
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 from nonovium_video_backend.video_encoder.fields import ImageField, VideoField
 from nonovium_video_backend.video_encoder.models import Format
@@ -44,6 +45,22 @@ class Video(models.Model):
 
 
 class VideoPost(models.Model):
+    class PublishStatus(models.TextChoices):
+        DRAFT = "D", _("Draft")
+        PUBLISHED = "P", _("Published")
+        DELETED = "DLT", _("Deleted")
+
+    class PrivacyStatus(models.TextChoices):
+        PUBLIC = "PUB", _("Public")
+        PRIVATE = "PRV", _("Private")
+        WITH_LINK = "WLK", _("With Link")
+
+    publish_status = models.CharField(
+        max_length=3, choices=PublishStatus.choices, default=PublishStatus.PUBLISHED
+    )
+    privacy_status = models.CharField(
+        max_length=3, choices=PrivacyStatus.choices, default=PrivacyStatus.PUBLIC
+    )
     title = models.CharField(max_length=255)
     post_id = models.CharField(
         default=f"${str(uuid.uuid4())}", editable=False, null=False, max_length=256

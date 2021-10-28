@@ -105,11 +105,7 @@ class FFmpegBackend(BaseEncoderBackend):
         Yields:
             Generator[float, None, None]: [description]
         """
-        """
-        Encode a video.
 
-        All encoder specific options are passed in using `params`.
-        """
         total_time = self.get_media_info(source_path)["duration"]
 
         cmd = [self.ffmpeg_path, "-i", source_path, *self.params, *params, target_path]
