@@ -22,8 +22,9 @@ class VideoField(ImageField):
     descriptor_class = VideoFileDescriptor
     description = _("Video")
 
-    def __init__(self, verbose_name=None, name=None, duration_field=None, **kwargs):
+    def __init__(self, verbose_name=None, name=None, duration_field=None, size_field=None, **kwargs):
         self.duration_field = duration_field
+        self.size_field = size_field
         super(VideoField, self).__init__(verbose_name, name, **kwargs)
 
     def check(self, **kwargs):
@@ -62,8 +63,15 @@ class VideoField(ImageField):
         # get duration if file is defined
         duration = _file.duration if _file else None
 
+
         # update duration
         setattr(instance, self.duration_field, duration)
+
+        # get size if file is defined
+        size = _file.size if _file else None
+
+        # update size
+        setattr(instance, self.size_field, size)
 
     def formfield(self, **kwargs):
         # use normal FileFieldWidget for now

@@ -18,6 +18,14 @@ class VideoFile(File):
 
     width = property(_get_width)
 
+    def _get_size(self):
+        """
+        Returns the size of the video file, in bytes.
+        """
+        return self._get_video_info().get("size", 0)
+
+    size = property(_get_size)
+
     def _get_height(self):
         """
         Returns video height in pixels.

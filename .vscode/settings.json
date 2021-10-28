@@ -21,5 +21,14 @@
     "titleBar.inactiveBackground": "#c4860199",
     "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.remoteColor": "#c48601"
+  "peacock.remoteColor": "#c48601",
+  "python.linting.enabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "python.pythonPath": "./venv/bin/python3.9",
+  "editor.rulers": [
+    88
+  ],
+  "importMagic.indentWithTabs": true,
+  "importMagic.maxColumns": 80,
 }

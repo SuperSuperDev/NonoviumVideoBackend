@@ -168,13 +168,13 @@ from nonovium_video_backend.videos.models import Video
 
 @celery_app.task(soft_time_limit=10000)
 def convert_video_task(app_label, model_name, pk):
-    convert_all_videos(app_label, model_name, pk)
+    create_thumbnail(app_label, model_name, pk)
     return True
 
 
 @celery_app.task(soft_time_limit=20)
-def create_thumbnail(video_pk):
-    video = Video.objects.get(pk=video_pk)
+def create_thumbnail(app_label, model_name, pk):
+    video = Video.objects.get(pk=pk)
     if not video.file:
         # no video file attached
         return print("NO VIDEO FILE FOUND")
@@ -185,12 +185,14 @@ def create_thumbnail(video_pk):
     print("GENERATING THUMBNAIL")
     encoder_backend = get_backend()
     thumbnail_path = encoder_backend.get_thumbnail(video.file.path)
-    filename = os.path.basename(str(video_pk) + ".png")
+    filename = os.path.basename(str(pk) + ".png")
 
     try:
         with open(thumbnail_path, "rb") as file_handler:
             django_file = File(file_handler)
             video.thumbnail.save(filename, django_file)
-            video.save()
+            video.update_fields = ["thumbnail"]
     finally:
         os.unlink(thumbnail_path)
+
+        return convert_all_videos(app_label, model_name, pk)

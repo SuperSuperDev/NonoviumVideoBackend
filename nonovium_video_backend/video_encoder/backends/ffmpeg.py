@@ -156,6 +156,7 @@ class FFmpegBackend(BaseEncoderBackend):
 
         return {
             "duration": float(media_info["format"]["duration"]),
+            "size": int(media_info["format"]["size"]),
             "width": int(media_info["video"][0]["width"]),
             "height": int(media_info["video"][0]["height"]),
         }

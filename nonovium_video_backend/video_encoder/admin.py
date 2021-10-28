@@ -6,7 +6,7 @@ from .models import Format
 
 class FormatInline(admin.GenericTabularInline):
     model = Format
-    fields = ("format", "progress", "file", "width", "height", "duration")
+    fields = ("format", "progress", "file", "width", "height", "duration", "size")
     readonly_fields = fields
     extra = 0
     max_num = 0
@@ -28,6 +28,7 @@ class FormatAdmin(django_admin.ModelAdmin):
         "height",
         "duration",
         "object_id",
+        "size",
     )
     fields = (
         "format",
@@ -36,6 +37,7 @@ class FormatAdmin(django_admin.ModelAdmin):
         "width",
         "height",
         "duration",
+        "size",
         "object_id",
         # "video",
         "field_name",

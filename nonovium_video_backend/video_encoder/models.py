@@ -47,6 +47,7 @@ class Format(models.Model):
         verbose_name=_("File"),
         width_field="width",
         height_field="height",
+        size_field="size",
     )
     width = models.PositiveIntegerField(
         editable=False,
@@ -62,6 +63,11 @@ class Format(models.Model):
         editable=False,
         null=True,
         verbose_name=_("Duration (s)"),
+    )
+    size = models.PositiveIntegerField(
+        editable=False,
+        null=True,
+        verbose_name=_("File Size (bytes)"),
     )
 
     objects = FormatManager()
