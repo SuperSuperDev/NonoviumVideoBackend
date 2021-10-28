@@ -9,7 +9,7 @@ Your platform, your videos, your data
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
      :target: https://github.com/ambv/black
      :alt: Black code style
--- image:: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml/badge.svg
+.. image:: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml/badge.svg
      :target: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml
      :alt: Continuous integration
 
