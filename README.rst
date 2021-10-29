@@ -116,7 +116,7 @@ Helpful ZSH Commands
 
 .. code-block:: bash
 
-    $ alias dkup="docker-compose -f local.yml up"
+    alias dkup="docker-compose -f local.yml up"
     alias dkdown="docker-compose -f local.yml down"
     alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
     alias dkbld="docker-compose -f local.yml build --no-cache"
