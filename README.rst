@@ -4,11 +4,11 @@ Nonovium Video Backend
 Your platform, your videos, your data
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-     :target: https://github.com/ambv/black
-     :alt: Black code style
+    :target: https://github.com/ambv/black
+    :alt: Black code style
 .. image:: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml/badge.svg
-     :target: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml
-     :alt: Continuous integration
+    :target: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml
+    :alt: Continuous integration
 
 :License: GPLv3
 
@@ -40,7 +40,7 @@ Running type checks with mypy:
 
 ::
 
-  $ mypy nonovium_video_backend
+    $ mypy nonovium_video_backend
 
 Test coverage
 ^^^^^^^^^^^^^
@@ -56,7 +56,7 @@ Running tests with py.test
 
 ::
 
-  $ pytest
+    $ pytest
 
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,6 +111,45 @@ See detailed `cookiecutter-django Docker documentation`_.
 
 .. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
 
+Helpful ZSH Commands
+--------------------
+.. code-block:: language-sh
+    :caption: Helpful ZSH Commands
+    :name: zsh-commands
+
+    alias dkup="docker-compose -f local.yml up"
+    alias dkdown="docker-compose -f local.yml down"
+    alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
+    alias dkbld="docker-compose -f local.yml build --no-cache"
+
+    alias dkcel="docker-compose -f local.yml run --rm celery"
+
+    alias dkpy="docker-compose -f local.yml run --rm django python manage.py"
+    alias dkpyrun="docker-compose -f local.yml run --rm django python manage.py runserver"
+    alias dkpymkmig="docker-compose -f local.yml run --rm django python manage.py makemigrations"
+    alias dkpymig="docker-compose -f local.yml run --rm django python manage.py migrate"
+    alias dkpyshell="docker-compose -f local.yml run --rm django python manage.py shell"
+    alias dkpytest="docker-compose -f local.yml run --rm django python manage.py test"
+    alias dkpycoverage="docker-compose -f local.yml run --rm django python manage.py test --coveragetest"
+    alias dkpydump="docker-compose -f local.yml run --rm django python manage.py dumpdata --indent=2"
+    alias dkpyload="docker-compose -f local.yml run --rm django python manage.py loaddata"
+    alias dkpysupu="docker-compose -f local.yml run --rm django python manage.py createsuperuser --username admin --email admin@email.com"
+    alias dkpyblack="docker-compose -f local.yml run --rm django python -m black ."
+    alias dkdjstartapp="docker-compose -f local.yml run --rm django django-admin startapp"
+    alias dkpycel="docker-compose -f local.yml run --rm django celery"
+    alias dkpystartapp="docker-compose -f local.yml run --rm django python manage.py startapp posts"
+    alias dkpqlstart="docker-compose -f local.yml run --rm postgres sudo service postgresql start"
+    alias dkpqlstop="docker-compose -f local.yml run --rm postgres sudo service postgresql stop"
+    alias dkpqlrestart="docker-compose -f local.yml run --rm postgres sudo service postgresql restart"
+    alias dkpqlstatus="docker-compose -f local.yml run --rm postgres sudo service postgresql status"
+    alias dkpqlbackup="docker-compose -f local.yml exec postgres backup"
+
+
+
+
+
+
+
 
 Acknowledgements
 ----------------
@@ -119,5 +158,5 @@ Cookiecutter
 ^^^^^^^^^^^^^
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
-     :target: https://github.com/pydanny/cookiecutter-django/
-     :alt: Cookiecutter Django
+    :target: https://github.com/pydanny/cookiecutter-django/
+    :alt: Cookiecutter Django

@@ -20,12 +20,8 @@
     "titleBar.activeForeground": "#15202b",
     "titleBar.inactiveBackground": "#c4860199",
     "titleBar.inactiveForeground": "#15202b99",
-    "titleBar.border": "#221905",
-
     "editor.background": "#111116",
     "terminal.background": "#06060a"
-
-
   },
   "peacock.remoteColor": "#c48601",
 
@@ -43,4 +39,5 @@
     "comments": "",
     "textMateRules": []
   },
+  "restructuredtext.confPath": "${workspaceFolder}/docs",
 }
