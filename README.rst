@@ -127,8 +127,6 @@ Helpful ZSH Commands
     alias dkdown="docker-compose -f local.yml down"
     # Stop and remove/delete the containers (Does not remove postgres container but dumps the database):
     alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
-
-
     ######
     # Docker Django Container and main App Container)
     ######
