@@ -142,6 +142,7 @@ Helpful ZSH Commands
     alias dkpqlrestart="docker-compose -f local.yml run --rm postgres sudo service postgresql restart"
     alias dkpqlstatus="docker-compose -f local.yml run --rm postgres sudo service postgresql status"
     alias dkpqlbackup="docker-compose -f local.yml exec postgres backup"
+The above commands are for running against docker
 
 
 
