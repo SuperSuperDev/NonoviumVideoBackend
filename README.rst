@@ -113,6 +113,7 @@ See detailed `cookiecutter-django Docker documentation`_.
 
 Helpful ZSH Commands
 --------------------
+Commands to save you a lot of time::
 .. code-block:: bash
     :caption: Helpful ZSH Commands
     :name: zsh-commands
