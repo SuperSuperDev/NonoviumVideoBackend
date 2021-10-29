@@ -116,12 +116,10 @@ Helpful ZSH Commands
 .. code-block:: language-sh
     :caption: Helpful ZSH Commands
     :name: zsh-commands
-
-    alias dkup="docker-compose -f local.yml up"
+    $alias dkup="docker-compose -f local.yml up"
     alias dkdown="docker-compose -f local.yml down"
     alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
     alias dkbld="docker-compose -f local.yml build --no-cache"
-
     alias dkcel="docker-compose -f local.yml run --rm celery"
 
     alias dkpy="docker-compose -f local.yml run --rm django python manage.py"
