@@ -116,12 +116,23 @@ Helpful ZSH Commands
 
 .. code-block:: bash
 
-    alias dkup="docker-compose -f local.yml up"
-    alias dkdown="docker-compose -f local.yml down"
-    alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
+    ######
+    # Docker
+    ######
+    # When installing for the first time:
     alias dkbld="docker-compose -f local.yml build --no-cache"
-    alias dkcel="docker-compose -f local.yml run --rm celery"
+    # Start the containers:
+    alias dkup="docker-compose -f local.yml up"
+    # Stop the containers:
+    alias dkdown="docker-compose -f local.yml down"
+    # Stop and remove/delete the containers (Does not remove postgres container but dumps the database):
+    alias dkdownclean="docker-compose -f local.yml down --volumes --rmi all"
 
+
+    ######
+    # Docker Django Container and main App Container)
+    ######
+    alias dkpysupu="docker-compose -f local.yml run --rm django python manage.py createsuperuser --username admin --email admin@email.com"
     alias dkpy="docker-compose -f local.yml run --rm django python manage.py"
     alias dkpyrun="docker-compose -f local.yml run --rm django python manage.py runserver"
     alias dkpymkmig="docker-compose -f local.yml run --rm django python manage.py makemigrations"
@@ -131,17 +142,23 @@ Helpful ZSH Commands
     alias dkpycoverage="docker-compose -f local.yml run --rm django python manage.py test --coveragetest"
     alias dkpydump="docker-compose -f local.yml run --rm django python manage.py dumpdata --indent=2"
     alias dkpyload="docker-compose -f local.yml run --rm django python manage.py loaddata"
-    alias dkpysupu="docker-compose -f local.yml run --rm django python manage.py createsuperuser --username admin --email admin@email.com"
     alias dkpyblack="docker-compose -f local.yml run --rm django python -m black ."
     alias dkdjstartapp="docker-compose -f local.yml run --rm django django-admin startapp"
     alias dkpycel="docker-compose -f local.yml run --rm django celery"
-    alias dkpystartapp="docker-compose -f local.yml run --rm django python manage.py startapp posts"
+    alias dkpystartapp="docker-compose -f local.yml run --rm django python manage.py startapp"
+    ######
+    # Docker Postgres
+    ######
     alias dkpqlstart="docker-compose -f local.yml run --rm postgres sudo service postgresql start"
     alias dkpqlstop="docker-compose -f local.yml run --rm postgres sudo service postgresql stop"
     alias dkpqlrestart="docker-compose -f local.yml run --rm postgres sudo service postgresql restart"
     alias dkpqlstatus="docker-compose -f local.yml run --rm postgres sudo service postgresql status"
     alias dkpqlbackup="docker-compose -f local.yml exec postgres backup"
-The above commands are for running against docker
+    ######
+    # Docker Celery
+    ######
+    alias dkcel="docker-compose -f local.yml run --rm celery"
+
 
 
 .. code-block:: bash
