@@ -144,6 +144,8 @@ Helpful ZSH Commands
 The above commands are for running against docker
 
 
+.. code-block::
+    test
 
 
 
