@@ -63,10 +63,10 @@ class VideoPost(models.Model):
     )
     title = models.CharField(max_length=255)
     post_id = models.CharField(
-        default=f"${str(uuid.uuid4())}", editable=False, null=False, max_length=256
+        default=f"{str(uuid.uuid4())}", editable=False, null=False, max_length=256
     )
     slug = models.CharField(
-        max_length=255, unique=True, default=slugify(title), blank=True
+        max_length=255, unique=True, default=slugify(title), blank=True, editable=False
     )
     description = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -79,7 +79,6 @@ class VideoPost(models.Model):
         null=True,
         blank=True,
     )
-    uploaded_video = models.FileField(upload_to="videos/", blank=True)
     video = models.ForeignKey(
         "videos.Video",
         on_delete=models.CASCADE,
@@ -93,11 +92,11 @@ class VideoPost(models.Model):
 
     def save(self, *args, **kwargs):
 
-        if not self.slug:
-            self.slug = slugify(self.title)
-
         if not self.post_id:
             self.post_id = f"${str(uuid.uuid4())}"
+
+        if not self.slug:
+            self.slug = f"{slugify(self.title)}"
         super(VideoPost, self).save(*args, **kwargs)
 
     class Meta:
