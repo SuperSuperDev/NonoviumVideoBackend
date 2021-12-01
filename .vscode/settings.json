@@ -33,8 +33,11 @@
   "importMagic.maxColumns": 80,
   "python.linting.mypyEnabled": true,
   "editor.tokenColorCustomizations": {
-    "comments": "",
+    "comments": "#4777a7",
     "textMateRules": []
   },
   "restructuredtext.confPath": "${workspaceFolder}/docs",
+  "eslint.workingDirectories": [
+    "./client_nextjs"
+  ],
 }

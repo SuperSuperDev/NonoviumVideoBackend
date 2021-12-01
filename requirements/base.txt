@@ -23,6 +23,7 @@ django-redis==5.0.0  # https://github.com/jazzband/django-redis
 # Django REST Framework
 djangorestframework==3.12.4  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.10.0 # https://github.com/adamchainz/django-cors-headers
+djangorestframework-camel-case==1.2.0 # https://github.com/vbabiy/djangorestframework-camel-case
 # Django Video Encoding
 # django-video-encoding==1.0.0 # https://github.com/escaped/django-video-encoding
 django-rq==2.4.1

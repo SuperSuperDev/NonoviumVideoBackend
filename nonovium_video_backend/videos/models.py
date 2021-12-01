@@ -65,9 +65,7 @@ class VideoPost(models.Model):
     post_id = models.CharField(
         default=f"{str(uuid.uuid4())}", editable=False, null=False, max_length=256
     )
-    slug = models.CharField(
-        max_length=255, unique=True, default=slugify(title), blank=True, editable=False
-    )
+    slug = models.CharField(max_length=255, unique=True, blank=True, editable=False)
     description = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

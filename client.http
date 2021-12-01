@@ -2,3 +2,13 @@
 @authUrl =  "users"
 
 GET {{apiUrl}}/{{authUrl}}/
+
+###
+
+GET http://localhost:8000/api/users/
+
+###
+
+GET http://localhost:8000/api/videos/
+Content-Type: application/json
+Authorization: Token 4e95e5d2c9b43120fc7dbf7f46e1f1ef1f1776db
