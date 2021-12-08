@@ -5,6 +5,7 @@ volumes:
   local_postgres_data_backups: {}
 
 services:
+
   django: &django
     build:
       context: .

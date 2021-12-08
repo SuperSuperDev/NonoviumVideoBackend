@@ -2,26 +2,27 @@ import axios from 'axios'
 // import next image
 import Image from 'next/image'
 import Link from 'next/link'
+import VideoCard from '../../components/video/VideoCard'
+import VideoGrid from '../../components/video/VideoGrid'
 import { getAllVideos } from '../api/nonoviumVideo'
 
-function Videos({ videoPosts }){
+function VideoPosts({ videoPosts }){
   return (
-    console.log(`videoPosts`, videoPosts),
-    <ul>
-      {videoPosts?.map((videoPost) => (
-        <li key={videoPost.id}>
-          <Link href={`/videoPosts/${encodeURIComponent(videoPost.postId)}`}>
-          <a>{videoPost.title}</a>
-          </Link>
-          <Image
-          src={videoPost.video.thumbnail}
-          alt={videoPost.title}
-          width={300}
-          height={200}
-          />
-        </li>
-      ))}
-    </ul>
+    console.log(`videoPosts >>:`, videoPosts),
+    // <ul>
+    //   {videoPosts?.map((videoPost) => (
+    //     <li key={videoPost.id}>
+    //       <Link href={`/videoPosts/${encodeURIComponent(videoPost.postId)}`}>
+    //       <a><VideoCard key={videoPost.id} title={videoPost.title} thumbnail={videoPost.video.thumbnail} /></a>
+    //       </Link>
+    //       <br />
+    //     </li>
+
+    //   ))}
+    // </ul>
+    <>
+      <VideoGrid videoPosts={videoPosts} />
+    </>
   )
 }
 
@@ -36,7 +37,7 @@ function Videos({ videoPosts }){
 //   }
 // }
 
-export default Videos
+export default VideoPosts
 
 export async function getStaticProps() {
   return getAllVideos()

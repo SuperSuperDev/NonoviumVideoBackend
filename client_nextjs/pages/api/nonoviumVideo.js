@@ -17,12 +17,14 @@ function headers() {
 
 export async function getAllVideos() {
 
-const res = await axios.get('http://localhost:8000/api/videos/', headers())
+const res = await axios.get('http://localhost:8000/api/videoposts/', headers())
 const videoPosts = await res.data
   return {
     props: {
       videoPosts
-  }
+  },
+  revalidate: 10
+
 }
 }
 
@@ -32,6 +34,7 @@ export async function getVideoPost(postId) {
   return {
     props: {
       videoPost
-  }
+  },
+  // revalidate: 10
 }
 }

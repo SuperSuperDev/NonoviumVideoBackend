@@ -33,7 +33,7 @@
   "importMagic.maxColumns": 80,
   "python.linting.mypyEnabled": true,
   "editor.tokenColorCustomizations": {
-    "comments": "#4777a7",
+    "comments": "",
     "textMateRules": []
   },
   "restructuredtext.confPath": "${workspaceFolder}/docs",
