@@ -291,3 +291,7 @@ backups/
 *.webm
 *.ogg
 *.ogv
+test
+test-copy
+posts
+dockerized-neo4j-with-nextjs

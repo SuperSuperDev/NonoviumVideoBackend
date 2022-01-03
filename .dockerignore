@@ -8,3 +8,7 @@
 .readthedocs.yml
 .travis.yml
 venv
+dockerized-neo4j-with-nextjs
+client_nextjs
+test
+test-copy
