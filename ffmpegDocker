@@ -14,12 +14,12 @@ docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg:3.4-scratch \
 
 # Use ZeroMQ to toggle filter value on-fly
 
-# Let's start some process continuously writing some radio music, and listen it:
+# Let's start some process continuously writing some radio music and listen it:
 
  docker run --rm -d -v $(pwd):$(pwd) -w $(pwd) -p 11235:11235 \
         --name radio-writer jrottenberg/ffmpeg \
         -i http://radio.casse-tete.solutions/salut-radio-64.mp3 \
-        -filter_complex '[0:a]volume@vol=1,azmq=bind_address=tcp\\\://0.0.0.0\\\:11235[out]' \
+        -filter_complex '[0:a]volume@vol=1azmq=bind_address=tcp\\\://0.0.0.0\\\:11235[out]' \
         -map '[out]' ./salut-radio.mp3
 
  ffplay ./salut-radio.mp3
@@ -30,4 +30,24 @@ docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg:3.4-scratch \
 docker run -v $(pwd):$(pwd) -w $(pwd) \
         jrottenberg/ffmpeg:3.4-scratch -stats  \
         -i https://env-0561487.jcloud-ver-jpe.ik-server.com/wp-content/uploads/sites/5/2020/07/High_Tech_Logo_2.mp4 \
-        -r 1 -f image2 ./tmp/image%03d.jpg
+        -r 1 -f image2 ./tmp/image%03d.gif
+
+docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg \
+  -stats \
+  -i ./test/CF-Downloaded_test_default.mp4 \
+  -vf scale=-2:1080 -movflags +faststart \
+  -crf 17 -vcodec h264 -acodec aac -strict \
+  -2 -max_muxing_queue_size 512 -f mp4 ./test/test_WASM_CF-Downloaded.mp4
+
+
+docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg \
+  -stats \
+  '-i', 'tears_of_steel_1080p.mp4', '-vf', 'scale=-2:1080', '-movflags',
+  '+faststart', '-crf', '17', '-vcodec', 'h264', '-acodec', 'aac', '-strict',
+  '-2', '-max_muxing_queue_size', '1024', '-f', 'mp4', 'tears_test.mp4'
+
+
+docker run -v $(pwd):$(pwd) -w $(pwd) jrottenberg/ffmpeg \
+  -stats \
+  -i ./test/CF-Downloaded_test_default.mp4 \
+  -vframes 1 -ss 0.5 -y ./test/CF-Thumbnail.jpeg
