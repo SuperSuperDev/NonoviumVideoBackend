@@ -1,4 +1,6 @@
 import axios from "axios";
+import dotenv from 'dotenv'
+dotenv.config()
 
 const token = process.env.NONOVIUM_TOKEN
 
@@ -10,7 +12,7 @@ function headers() {
   return {
     headers: {
       ContentType: 'application/json',
-      Authorization: `Token 4e95e5d2c9b43120fc7dbf7f46e1f1ef1f1776db`
+      Authorization: `Token ${token}`
     },
   }
 }
