@@ -192,9 +192,9 @@ def create_thumbnail(app_label, model_name, pk):
             django_file = File(file_handler)
             video.thumbnail.save(filename, django_file)
             video.update_fields = ["thumbnail"]
-            print('VIDEO THUMBNAIL COMPLETE')
+            print("VIDEO THUMBNAIL COMPLETE")
     finally:
         os.unlink(thumbnail_path)
-        print('PREPARING TO RUN CONVERT ALL VIDEOS')
+        print("PREPARING TO RUN CONVERT ALL VIDEOS")
 
         return convert_all_videos(app_label, model_name, pk)

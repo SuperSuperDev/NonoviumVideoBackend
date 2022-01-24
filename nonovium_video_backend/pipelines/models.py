@@ -51,5 +51,3 @@ class VideoFile(models.Model):
                     self._meta.app_label, self._meta.model_name, self.pk
                 )
             )
-
-    print(user_directory_path)
