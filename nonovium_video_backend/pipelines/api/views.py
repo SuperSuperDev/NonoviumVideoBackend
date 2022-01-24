@@ -1,7 +1,5 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
-
-# from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 

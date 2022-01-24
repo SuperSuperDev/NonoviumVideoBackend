@@ -1,10 +1,10 @@
 import os
 import tempfile
-from django.db.models.fields.files import FileField
 
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
+from django.db.models.fields.files import FileField
 
 from . import signals
 from .backends import get_backend

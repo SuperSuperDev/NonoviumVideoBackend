@@ -1,16 +1,9 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
+from nonovium_video_backend.pipelines.api.views import VideoFileUploadViewSet
 from nonovium_video_backend.users.api.views import UserViewSet
-from nonovium_video_backend.videos.api.views import (
-    VideoPostViewSet,
-    # VideoUploadViewSet,
-    VideoViewSet,
-)
-from nonovium_video_backend.pipelines.api.views import (
-    VideoFileUploadViewSet,
-)
-# from nonovium_video_backend.videos.api.serializers import VideoPostSerializer
+from nonovium_video_backend.videos.api.views import VideoPostViewSet, VideoViewSet
 
 if settings.DEBUG:
     router = DefaultRouter()

@@ -10,7 +10,6 @@ from .manager import FormatManager
 
 
 def upload_format_to(i, f):
-    print(f'UPLOAD_FORMAT_TO (i): {i} \n UPLOAD_FORMAT_TO (f): {f}')
     return "%s_%s%s" % (
         splitext(getattr(i.video, i.field_name).name)[0],  # keep path
         i.format,
