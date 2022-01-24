@@ -30,6 +30,7 @@ def get_uploaded_media_info(app_label, model_name, pk):
         height=media_info["height"],
         size=media_info["size"],
         duration=media_info["duration"],
+        media_info=media_info,
     )
     return create_thumbnail(app_label, model_name, pk)
 

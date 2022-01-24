@@ -21,5 +21,6 @@ class VideoFileAdmin(admin.ModelAdmin):
         "size",
         "duration",
         "thumbnail",
+        "media_info",
     )
-    readonly_fields = ("width", "height", "size", "duration")
+    readonly_fields = ("width", "height", "size", "duration", "media_info")

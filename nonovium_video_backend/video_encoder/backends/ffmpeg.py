@@ -77,7 +77,9 @@ class FFmpegBackend(BaseEncoderBackend):
 
         Returns:
             subprocess.Popen: [description]
+
         """
+
         try:
             return subprocess.Popen(
                 cmd,
@@ -166,7 +168,7 @@ class FFmpegBackend(BaseEncoderBackend):
         return media_info
 
     def get_media_info(self, video_path: str) -> Dict[str, Union[int, float]]:
-        """
+        """Return the media info of a video .
         Return information about the given video.
         """
         cmd = [self.ffprobe_path, "-i", video_path]
@@ -181,6 +183,7 @@ class FFmpegBackend(BaseEncoderBackend):
             "size": int(media_info["format"]["size"]),
             "width": int(media_info["video"][0]["width"]),
             "height": int(media_info["video"][0]["height"]),
+            "media_info": str(media_info),
         }
 
     def get_thumbnail(self, video_path: str, at_time: float = 0.5) -> str:
