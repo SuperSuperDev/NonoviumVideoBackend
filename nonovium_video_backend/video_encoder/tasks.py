@@ -1,5 +1,6 @@
 import os
 import tempfile
+from django.db.models.fields.files import FileField
 
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
@@ -13,6 +14,32 @@ from .exceptions import VideoEncoderError
 from .fields import VideoField
 from .models import Format
 from .utils import get_local_path
+
+
+def convert_all_video_files(app_label, model_name, object_pk):
+    """
+    Automatically converts all videos of a given instance.
+    """
+    # get instance
+    Model = apps.get_model(app_label=app_label, model_name=model_name)
+    instance = Model.objects.get(pk=object_pk)
+
+    # search for `VideoFields`
+    fields = instance._meta.fields
+    print(f"FIELDS:>>>>>>>> >>>> >>> > > > {fields}")
+    for field in fields:
+        if isinstance(field, FileField) and not field.name == "thumbnail":
+            if not getattr(instance, field.name):
+                # ignore empty fields
+                print(
+                    f"{field.name}ERROR >> NO FILE FIELDS FOUND >>>> ERROR >>> ERROR >>>ERROR"
+                )
+                continue
+
+            # trigger conversion
+            fieldfile = getattr(instance, field.name)
+            print("VIDEO ENCODER: PREPARING TO RUN CONVERT_VIDEO")
+            convert_video(fieldfile)
 
 
 def convert_all_videos(app_label, model_name, object_pk):
@@ -40,6 +67,7 @@ def convert_video(fieldfile, force=False):
     """
     Converts a given video file into all defined formats.
     """
+    print("VIDEO ENCODER: CONVERT_VIDEO TASK STARTED")
     instance = fieldfile.instance
     field = fieldfile.field
 
@@ -116,6 +144,7 @@ def _encode(
             video_format.update_progress(progress)
 
         # save encoded file
+        print("VIDEO ENCODER: SAVING ENCODED FILE")
         filename = os.path.basename(source_path)
         # TODO remove existing file?
         video_format.file.save(

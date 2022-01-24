@@ -40,4 +40,5 @@
   "eslint.workingDirectories": [
     "./client_nextjs"
   ],
+  "peacock.color": "#c48601",
 }
