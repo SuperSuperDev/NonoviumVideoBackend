@@ -9,6 +9,10 @@ Your platform, your videos, your data
 .. image:: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml/badge.svg
     :target: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/workflows/ci.yml
     :alt: Continuous integration
+.. image:: https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot
+    :target: https://github.com/SuperSuperStore/NonoviumVideoBackend/actions/dependabot.yml
+    :alt: Dependabot Badge"
+
 
 :License: GPLv3
 
