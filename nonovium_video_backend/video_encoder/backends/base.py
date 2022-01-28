@@ -27,7 +27,7 @@ class BaseEncoderBackend(metaclass=abc.ABCMeta):
         self, video_path: str
     ) -> Dict[str, Union[int, float]]:  # pragma: no cover
         """
-        Return duration, width and height of the video.
+        Return duration, size, metadata, width and height of the video.
         """
 
     @abc.abstractmethod
