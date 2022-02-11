@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # OpenCV dependencies
   libgtk2.0-dev \
   pkg-config
-  # TODO Add ffmpeg, libgtk2.0-dev, pkg-config to production django Dockerfile
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
