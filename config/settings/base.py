@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+import os
 from pathlib import Path
 
 import environ
@@ -76,6 +77,9 @@ THIRD_PARTY_APPS = [
     # "video_encoding",
     "django_rq",
     "vidgear",
+    "m3u8",
+    "imagekit",
+    "drf_yasg",
 ]
 
 LOCAL_APPS = [
@@ -85,6 +89,10 @@ LOCAL_APPS = [
     "nonovium_video_backend.videos.apps.VideosConfig",
     "nonovium_video_backend.gears.apps.GearsConfig",
     "nonovium_video_backend.pipelines.apps.PipelinesConfig",
+    "nonovium_video_backend.uploader.apps.UploaderConfig",
+    "nonovium_video_backend.actions.apps.ActionsConfig",
+    "nonovium_video_backend.files.apps.FilesConfig",
+    "nonovium_video_backend.cms.apps.CMSConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -361,6 +369,46 @@ RQ_QUEUES = {
 }
 
 RQ_EXCEPTION_HANDLERS = ["path.to.my.handler"]  # If you need custom exception handlers
+
+# cms
+# ------------------------------------------------------------------------------
+PORTAL_NAME = "Nonovium Video"
+# valid choices here are 'public', 'private', 'unlisted
+PORTAL_WORKFLOW = "public"
+
+TEMP_DIRECTORY = "/tmp"  # Don't use a temp directory inside BASE_DIR!!!
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRIENDLY_TOKEN_LEN = 9
+MEDIA_IS_REVIEWED = True  # whether an admin needs to review a media file.
+# By default consider this is not needed.
+# If set to False, then each new media need be reviewed otherwise
+# it won't appear on public listings
+
+# if set to True the url for original file is returned to the API.
+SHOW_ORIGINAL_MEDIA = True
+# Keep in mind that nginx will serve the file unless there's
+# some authentication taking place. Check nginx file and setup a
+# basic http auth user/password if you want to restrict access
+MAX_MEDIA_PER_PLAYLIST = 70
+# bytes, size of uploaded media
+UPLOAD_MAX_SIZE = 800 * 1024 * 1000 * 5
+MAX_CHARS_FOR_COMMENT = 10000  # so that it doesn't end up huge
+# valid options: content, author
+RELATED_MEDIA_STRATEGY = "content"
+USERS_NOTIFICATIONS = {
+    "MEDIA_ADDED": True,  # in use
+    "MEDIA_ENCODED": False,  # not implemented
+    "MEDIA_REPORTED": True,  # in use
+}
+
+ADMINS_NOTIFICATIONS = {
+    "NEW_USER": True,  # in use
+    "MEDIA_ADDED": True,  # in use
+    "MEDIA_ENCODED": False,  # not implemented
+    "MEDIA_REPORTED": True,  # in use
+}
+# VideoEncoder
+# ------------------------------------------------------------------------------
 
 VIDEO_ENCODING_BACKEND = (
     "nonovium_video_backend.video_encoder.backends.ffmpeg.FFmpegBackend"

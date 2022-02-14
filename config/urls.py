@@ -5,8 +5,21 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.permissions import AllowAny
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="MediaCMS API",
+        default_version="v1",
+        contact=openapi.Contact(url="https://mediacms.io"),
+        x_logo={"url": "../../static/images/logo_dark.svg"},
+    ),
+    public=True,
+    permission_classes=(AllowAny,),
+)
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
@@ -18,7 +31,6 @@ urlpatterns = [
     path("users/", include("nonovium_video_backend.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("videos/", include("nonovium_video_backend.videos.urls", namespace="videos")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     # Static file serving when using Gunicorn + Uvicorn for local web socket development
@@ -60,3 +72,21 @@ if settings.DEBUG:
 
 # django_rq
 urlpatterns += [path("django-rq/", include("django_rq.urls"))]
+
+# cms
+urlpatterns += [
+    path(r"^", include("nonovium_video_backend.files.urls")),
+    # path(r"^", include("nonovium_video_backend.users.urls")),
+    path(r"^accounts/", include("allauth.urls")),
+    path(r"^api-auth/", include("rest_framework.urls")),
+    path(
+        r"^swagger(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    path(
+        r"^swagger/$",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+]
