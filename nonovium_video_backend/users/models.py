@@ -1,6 +1,6 @@
 import random
 
-from django.conf import settings
+from nonovium_video_backend.cms import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import EmailMessage
 from django.db import models

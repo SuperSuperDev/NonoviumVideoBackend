@@ -80,6 +80,8 @@ THIRD_PARTY_APPS = [
     "m3u8",
     "imagekit",
     "drf_yasg",
+    # Open API 3.0
+    "drf_spectacular"
 ]
 
 LOCAL_APPS = [
@@ -335,6 +337,7 @@ REST_FRAMEWORK = {
         "djangorestframework_camel_case.parser.CamelCaseJSONParser",
         # Any other parsers
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -369,6 +372,16 @@ RQ_QUEUES = {
 }
 
 RQ_EXCEPTION_HANDLERS = ["path.to.my.handler"]  # If you need custom exception handlers
+
+# drf-spectacular (Swagger UI OpenApi 3.0) https://github.com/tfranzel/drf-spectacular
+# ------------------------------------------------------------------------------
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'NonoviumVideo API',
+    'DESCRIPTION': 'Currently in development and subject to breaking changes',
+    'VERSION': '1.0.1',
+    # OTHER SETTINGS
+    'COMPONENT_SPLIT_REQUEST': True,
+}
 
 # cms
 # ------------------------------------------------------------------------------

@@ -5,6 +5,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.authtoken.views import obtain_auth_token
@@ -75,18 +80,27 @@ urlpatterns += [path("django-rq/", include("django_rq.urls"))]
 
 # cms
 urlpatterns += [
-    path(r"^", include("nonovium_video_backend.files.urls")),
+    path(r"", include("nonovium_video_backend.files.urls")),
     # path(r"^", include("nonovium_video_backend.users.urls")),
-    path(r"^accounts/", include("allauth.urls")),
-    path(r"^api-auth/", include("rest_framework.urls")),
+    path(r"accounts/", include("allauth.urls")),
+    path(r"api-auth/", include("rest_framework.urls")),
     path(
-        r"^swagger(?P<format>\.json|\.yaml)$",
+        r"swagger(?P<format>\.json|\.yaml)",
         schema_view.without_ui(cache_timeout=0),
         name="schema-json",
     ),
     path(
-        r"^swagger/$",
+        r"swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+]
+
+# drf_spectacular Swagger UI (OpenAPI 3.0)
+urlpatterns += [
+    # YOUR PATTERNS
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]

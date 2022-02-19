@@ -37,3 +37,6 @@ django-imagekit
 django-mptt
 filetype
 drf-yasg==1.20.0
+
+#Swagger Open API 3
+drf-spectacular==0.21.2
