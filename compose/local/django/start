@@ -6,4 +6,11 @@ set -o nounset
 
 
 python manage.py migrate
+DJANGO_SUPERUSER_PASSWORD=Admin1 python manage.py createsuperuser \
+            --no-input \
+            --username=Admin1 \
+            --email=steven@supersuperstore.com \
+            --database=default || true
+        echo "Created admin user with default password"
+
 uvicorn config.asgi:application --host 0.0.0.0 --reload
