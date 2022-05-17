@@ -13,7 +13,7 @@
     "@choc-ui/logo": "^1.0.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "axios": "^0.24.0",
+    "axios": "^0.26.1",
     "framer-motion": "^4.1.17",
     "head": "^1.0.0",
     "next": "12.0.7",
